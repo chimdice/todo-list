@@ -1,16 +1,16 @@
-import { todoItemCreator, todoLists} from "./item.js";
+import { CreateProjectOnPage, LoadProjectOnPage, LoadProjectCreation } from "./load.js";
+import { todoLists } from "./todo.js";
+import "./style.css";
 
-const mainLists = new todoLists()
+const todosSection = document.querySelector(".sidebar-content");
+const addProject = document.querySelector(".add-project");
+const main = document.querySelector('.main-section')
 
-const item1 = todoItemCreator("One", "Two", "Three", "Four");
-mainLists.addItemToList("default", item1)
+const mainLists = new todoLists(todosSection);
 
-mainLists.addProject("homework");
-const item2 = todoItemCreator("Five", "Six", "Seven", "Eight");
-mainLists.addItemToList("homework", item2)
-
-mainLists.removeItemToList("default", item1)
-mainLists.deleteProject("homework")
-
+addProject.addEventListener("click", () => {
+    const submit = LoadProjectCreation(main)
+    console.log(submit);
+})
 
 console.log(mainLists.projects);

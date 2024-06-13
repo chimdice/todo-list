@@ -1,5 +1,5 @@
-const todoItemCreator = (title, description, dueDate, priority) => {
-    return {title, description, dueDate, priority}
+const todoItemCreator = (title, description, dueDate, priority, notes) => {
+    return {title, description, dueDate, priority, notes}
 };
 
 const projectCreator = (projects, name) => {
@@ -20,32 +20,4 @@ const removeItem = (project, item) => {
 };
 
 
-class todoLists {
-    constructor() {
-        this.projects = {
-            "default":[]
-        }
-    };
-
-    addItemToList (project, item) {
-        const projectList = this.projects[project];
-        addItem(projectList, item);
-    };
-
-    removeItemToList (project, item) {
-        const projectList = this.projects[project];
-        removeItem(projectList, item);
-    };
-
-    addProject (name) {
-        const projects = this.projects;
-        projectCreator(projects, name);
-    };
-
-    deleteProject (name) {
-        const projects = this.projects;
-        projectDeletor(projects, name);
-    };
-}
-
-export {todoItemCreator, todoLists}
+export {todoItemCreator, projectCreator, projectDeletor, addItem, removeItem}
