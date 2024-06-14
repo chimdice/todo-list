@@ -1,5 +1,7 @@
-import { CreateProjectOnPage, LoadProjectOnPage, LoadProjectCreation, LoadProjectDeletion, clearPage} from "./load.js";
+import { CreateProjectOnPage, LoadProjectOnPage, LoadProjectCreation, LoadProjectDeletion, clearPage} from "./load_project.js";
 import { todoLists } from "./todo.js";
+import { todoItemCreator } from "./item.js";
+import { loadToDo } from "./load_items.js";
 import "./style.css";
 
 const todosSection = document.querySelector(".sidebar-content");
@@ -8,6 +10,21 @@ const main = document.querySelector('.main-section');
 const deleteButton = document.querySelector(".delete-project");
 
 const mainLists = new todoLists(todosSection);
+const item1 = todoItemCreator('1', '2', '3', '4', '5');
+mainLists.addItemToList('default', item1);
+
+const getSideBarName = function () {
+    const todosSectionName = document.querySelectorAll(".sidebar-content div");
+    todosSectionName.forEach(name => {
+        name.addEventListener('click', () => {
+            let nameInfo = name.textContent;
+            console.log(mainLists.projects[nameInfo]);
+            loadToDo(mainLists.projects[nameInfo]);
+        });
+    });
+};
+
+getSideBarName();
 
 addProject.addEventListener("click", () => {
     const submit = LoadProjectCreation(main)
@@ -18,7 +35,7 @@ addProject.addEventListener("click", () => {
         const projectSideBar = CreateProjectOnPage(projectNameValue);
         LoadProjectOnPage(todosSection, projectSideBar)
         projectName.value = ''
-        console.log(mainLists.projects);
+        getSideBarName();
         event.preventDefault()
     })
 })

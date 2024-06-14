@@ -1,5 +1,5 @@
 import {todoItemCreator, projectCreator, projectDeletor, addItem, removeItem} from './item.js';
-import {CreateProjectOnPage, LoadProjectOnPage, LoadProjectCreation} from './load.js'
+import {CreateProjectOnPage, LoadProjectOnPage, LoadProjectCreation} from './load_project.js'
 
 export class todoLists {
     constructor(section) {

@@ -36,6 +36,11 @@ section {
     background-color: var(--light-cyan);
 }
 
+.sidebar div:hover {
+    background: var(--light-gray);
+    cursor: pointer;
+}
+
 .main-section {
     flex: 4;
     display: flex;
