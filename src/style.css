@@ -52,3 +52,13 @@ header, footer {
     height: 10svh;
     background-color: var(--light-cyan);
 }
+
+#project-tasks {
+    display: flex;
+}
+
+.item-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
