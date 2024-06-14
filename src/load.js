@@ -23,7 +23,8 @@ const LoadProjectFourm = () => {
 
     const inputButton = document.createElement("button");
     inputButton.setAttribute('type', 'submit');
-    inputButton.setAttribute('value', 'submit');
+    inputButton.id = 'submit-button';
+    inputButton.textContent = 'Submit';
 
     form.appendChild(label);
     form.appendChild(input);
@@ -36,6 +37,10 @@ const LoadProjectCreation = (main) => {
     while (main.firstChild) {
         main.removeChild(main.lastChild)
     };
+
+    const header = document.createElement('h2');
+    header.textContent = "Create New Project!"
+    main.appendChild(header)
 
     const form = LoadProjectFourm()
     main.appendChild(form)

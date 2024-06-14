@@ -10,7 +10,14 @@ const mainLists = new todoLists(todosSection);
 
 addProject.addEventListener("click", () => {
     const submit = LoadProjectCreation(main)
-    console.log(submit);
+    submit.addEventListener("click", (event) => {
+        const projectName = document.querySelector("#project-label").value;
+        mainLists.addProject(projectName);
+        const projectSideBar = CreateProjectOnPage(projectName);
+        LoadProjectOnPage(todosSection, projectSideBar)
+        console.log(mainLists.projects);
+        event.preventDefault()
+    })
 })
 
 console.log(mainLists.projects);
