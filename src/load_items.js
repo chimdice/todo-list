@@ -2,49 +2,37 @@ import { clearPage } from "./load_project.js";
 
 const main = document.querySelector('.main-section');
 
-const loadToDo = (projectName, nameInfo) => {
+const loadTask = (taskObject) => {
     clearPage(main);
-    let taskNubmer = 1;
     const todos = document.createElement("div");
-    todos.id = "project-tasks";
+    todos.id = "task-dict";
 
-    for (let task in projectName) {
+    for (let key in taskObject) {
+        let value = taskObject[key];
         const infoDiv = document.createElement('div');
-        infoDiv.id = "todo-task";
+        infoDiv.id = "task-element";
 
-        const infoHeader = document.createElement('h4');
-        infoHeader.textContent = `task ${taskNubmer}`
-        taskNubmer++
-        infoDiv.appendChild(infoHeader);
-
-        const info = projectName[task]
-        for (let key in info) {
+        if (key === 'title') {
+            const infoHeader = document.createElement('h3');
+            infoHeader.textContent = value
+            infoDiv.appendChild(infoHeader);
+        } else {
             const partofInfo = document.createElement('p');
-            partofInfo.textContent = `${key}: ${info[key]}`;
+            partofInfo.textContent = `${key}: ${value}`;
             infoDiv.appendChild(partofInfo);
         };
 
         todos.appendChild(infoDiv)
     };
 
-    const nameTitle = document.createElement('h2');
-    nameTitle.textContent = nameInfo;
-    main.appendChild(nameTitle);
     main.appendChild(todos);
 
-    const addButton = document.createElement('button');
-    addButton.classList.add('item-button');
-    addButton.textContent = "Add new task";
-    const deleteButton = document.createElement('button');
-    deleteButton.classList.add('item-button');
-    deleteButton.textContent = "Delete a task";
+    const editButton = document.createElement('button');
+    editButton.classList.add('edit-button');
+    editButton.textContent = "Edit task";
+    main.appendChild(editButton);
 
-    const buttonHolder = document.createElement('div');
-    buttonHolder.appendChild(addButton);
-    buttonHolder.appendChild(deleteButton);
-    main.appendChild(buttonHolder);
-
-    return [addButton, deleteButton];
+    return editButton;
 };
 
 const LoadItemFourm = () => {
@@ -198,4 +186,69 @@ const LoadItemDeletion = (main, projectList) => {
     return form.lastChild;
 };
 
-export {loadToDo, LoadItemCreation, LoadItemDeletion}
+//Load item preview, when you click on it, it will load item
+const loadPreview = (projectName, nameInfo) => {
+    clearPage(main);
+    let taskNubmer = 1;
+    const todos = document.createElement("div");
+    todos.id = "project-tasks";
+
+    const taskDivList = [];
+
+    for (let task in projectName) {
+        const infoDiv = document.createElement('div');
+        infoDiv.id = "todo-task";
+        infoDiv.classList.add(nameInfo, task)
+
+        const infoHeader = document.createElement('h4');
+        infoHeader.textContent = `task ${taskNubmer}`
+        taskNubmer++
+        infoDiv.appendChild(infoHeader);
+
+        const info = projectName[task]
+        const infoTitle = document.createElement('p');
+        infoTitle.textContent = `Ttile: ${info['title']}`;
+        infoDiv.appendChild(infoTitle);
+        const infoDate = document.createElement('p');
+        infoDate.textContent = `Due Date: ${info['due']}`;
+        infoDiv.appendChild(infoDate);
+
+        todos.appendChild(infoDiv);
+        taskDivList.push(infoDiv);
+    };
+
+    const nameTitle = document.createElement('h2');
+    nameTitle.textContent = nameInfo;
+    main.appendChild(nameTitle);
+    main.appendChild(todos);
+
+    const addButton = document.createElement('button');
+    addButton.classList.add('item-button');
+    addButton.textContent = "Add new task";
+    const deleteButton = document.createElement('button');
+    deleteButton.classList.add('item-button');
+    deleteButton.textContent = "Delete a task";
+
+    const buttonHolder = document.createElement('div');
+    buttonHolder.appendChild(addButton);
+    buttonHolder.appendChild(deleteButton);
+    main.appendChild(buttonHolder);
+
+    const expand = document.createElement('p');
+    expand.textContent = "click task to expand."
+    main.appendChild(expand);
+
+    return [addButton, deleteButton, taskDivList];
+
+};
+
+//Edit task form
+const editTaskForm = (object) => {
+    const form = LoadItemFourm();
+
+    const formTitle = form.children[0].children[1];
+    
+    return form;
+};
+
+export {loadTask, LoadItemCreation, LoadItemDeletion, loadPreview, editTaskForm}

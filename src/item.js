@@ -1,5 +1,5 @@
-const todoItemCreator = (title, description, dueDate, priority, notes) => {
-    return {title, description, dueDate, priority, notes}
+const todoItemCreator = (title, description, due, priority, notes) => {
+    return {title, description, due, priority, notes}
 };
 
 const projectCreator = (projects, name) => {

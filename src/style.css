@@ -33,10 +33,12 @@ section {
 }
 
 .sidebar button,
-.item-button {
+.item-button,
+.edit-button {
     border: none;
     background-color: var(--light-cyan);
     margin: 10px;
+    padding: 10px;
 }
 
 .sidebar p:hover {
@@ -72,5 +74,15 @@ h1 {
 }
 
 button:hover {
+    cursor: pointer;
+}
+
+#todo-task {
+    border: 1px solid black;
+    padding: 20px;
+}
+
+#todo-task:hover {
+    background-color: var(--light-gray);
     cursor: pointer;
 }
