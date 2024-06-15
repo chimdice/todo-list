@@ -7,9 +7,10 @@ const clearPage = (main) => {
 /*Create Project */
 
 const CreateProjectOnPage = function (name) {
-    const projectElement = document.createElement('div');
+    const projectElement = document.createElement('p');
     projectElement.id = `${name}-list`;
     projectElement.textContent = name;
+    projectElement.setAttribute('style', 'text-align:center');
     
     return projectElement;
 };

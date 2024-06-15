@@ -14,7 +14,7 @@ const item1 = todoItemCreator('1', '2', '3', '4', '5');
 mainLists.addItemToList('default', item1);
 
 const getSideBarName = function () {
-    const todosSectionName = document.querySelectorAll(".sidebar-content div");
+    const todosSectionName = document.querySelectorAll(".sidebar-content p");
     todosSectionName.forEach(name => {
         name.addEventListener('click', () => {
             let nameInfo = name.textContent;
@@ -74,6 +74,7 @@ const getSideBarName = function () {
 getSideBarName();
 
 addProject.addEventListener("click", () => {
+    clearPage(main)
     const submit = LoadProjectCreation(main)
     submit.addEventListener("click", (event) => {
         const projectName = document.querySelector("#project-label");
@@ -83,11 +84,13 @@ addProject.addEventListener("click", () => {
         LoadProjectOnPage(todosSection, projectSideBar)
         projectName.value = ''
         getSideBarName();
+        clearPage(main);
         event.preventDefault()
-    })
-})
+    });
+});
 
 deleteButton.addEventListener("click", () => {
+    clearPage(main)
     const submit = LoadProjectDeletion(main, mainLists.projects);
 
     submit.addEventListener('click', (event) => {
@@ -101,12 +104,13 @@ deleteButton.addEventListener("click", () => {
         });
 
         for (let key in checkedProjects) {
-            const id = document.querySelector(`${key}-list`)
+            const keyName = checkedProjects[key];
+            const id = document.querySelector(`#${keyName}-list`);
             todosSection.removeChild(id);
-            mainLists.deleteProject(key);
+            mainLists.deleteProject(keyName);
         };
 
-        clearPage(main);
+        clearPage(main)
         event.preventDefault();
     });
 });
