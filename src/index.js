@@ -10,8 +10,10 @@ const main = document.querySelector('.main-section');
 const deleteButton = document.querySelector(".delete-project");
 
 const mainLists = new todoLists(todosSection);
-const item1 = todoItemCreator('1', '2', '3', '4', '5');
-mainLists.addItemToList('default', item1);
+if ( localStorage.getItem('todo')) {
+    localStorage.setItem('todo', JSON.stringify(mainLists));
+};
+
 
 const getSideBarName = function () {
     const todosSectionName = document.querySelectorAll(".sidebar-content p");
@@ -29,6 +31,7 @@ const getSideBarName = function () {
             expandItem.forEach(item => {
                 item.addEventListener("click", ()=> {
                     let classInfo = item.className.split(' ');
+                    console.log(mainLists);
                     const taskDict = mainLists.projects[classInfo[0]][Number(classInfo[1])];
                     const edit = loadTask(taskDict);
                     // edit the task
@@ -54,6 +57,7 @@ const getSideBarName = function () {
 
                             mainLists.removeItemToList(nameInfo, taskDict);
                             mainLists.addItemToList(nameInfo, newItem)
+                            localStorage.setItem('todo', JSON.stringify(mainLists));
                             clearPage(main);
                             event.preventDefault()
                         });
@@ -79,6 +83,7 @@ const getSideBarName = function () {
                     );
 
                     mainLists.addItemToList(nameInfo, newItem)
+                    localStorage.setItem('todo', JSON.stringify(mainLists));
                     clearPage(main);
                     event.preventDefault()
                 });
@@ -101,6 +106,7 @@ const getSideBarName = function () {
                             mainLists.removeItemToList(nameInfo, taskTitle);
                         };
                     };
+                    localStorage.setItem('todo', JSON.stringify(mainLists));
                     clearPage(main);
                     event.preventDefault();
                 });
@@ -122,6 +128,7 @@ addProject.addEventListener("click", () => {
         LoadProjectOnPage(todosSection, projectSideBar)
         projectName.value = ''
         getSideBarName();
+        localStorage.setItem('todo', JSON.stringify(mainLists));
         clearPage(main);
         event.preventDefault()
     });
@@ -147,7 +154,7 @@ deleteButton.addEventListener("click", () => {
             todosSection.removeChild(id);
             mainLists.deleteProject(keyName);
         };
-
+        localStorage.setItem('todo', JSON.stringify(mainLists));
         clearPage(main)
         event.preventDefault();
     });
