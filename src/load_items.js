@@ -59,8 +59,11 @@ const LoadItemFourm = () => {
     input.setAttribute('type', 'text');
     input.setAttribute('name', 'task-name');
     input.setAttribute('id', 'task-name');
+    input.setAttribute('required', '');
+    const divder = document.createElement('div');
+    divder.appendChild(input);
     itemDivOne.appendChild(label);
-    itemDivOne.appendChild(input);
+    itemDivOne.appendChild(divder);
 
     const itemDivTwo = document.createElement('div');
     const labelTwo = document.createElement('label');
@@ -70,8 +73,11 @@ const LoadItemFourm = () => {
     inputTwo.setAttribute('rows', '4');
     inputTwo.setAttribute('cols', '80');
     inputTwo.setAttribute('id', 'task-description');
+    inputTwo.setAttribute('required', '');
+    const divderTwo = document.createElement('div');
+    divderTwo.appendChild(inputTwo);
     itemDivTwo.appendChild(labelTwo);
-    itemDivTwo.appendChild(inputTwo);
+    itemDivTwo.appendChild(divderTwo);
 
     const itemDivThree = document.createElement('div');
     const labelThree = document.createElement('label');
@@ -81,8 +87,11 @@ const LoadItemFourm = () => {
     inputThree.setAttribute('type', 'date');
     inputThree.setAttribute('name', 'task-date');
     inputThree.setAttribute('id', 'task-date');
+    inputThree.setAttribute('required', '');
+    const divderThree = document.createElement('div');
+    divderThree.appendChild(inputThree);
     itemDivThree.appendChild(labelThree);
-    itemDivThree.appendChild(inputThree);
+    itemDivThree.appendChild(divderThree);
 
     const field = document.createElement('fieldset');
     const legend = document.createElement('legend');
@@ -97,8 +106,10 @@ const LoadItemFourm = () => {
         labelRadio.textContent = priority;
         const inputRadio = document.createElement("input");
         inputRadio.setAttribute('type', 'radio');
-        inputRadio.setAttribute('name', `radio-${priority}`);
+        inputRadio.setAttribute('name', `radio-prio`);
+        inputRadio.setAttribute('value', priority);
         inputRadio.setAttribute('id', `radio-${priority}`);
+        inputRadio.setAttribute('required', '');
         radioDivder.appendChild(inputRadio);
         radioDivder.appendChild(labelRadio);
         field.appendChild(radioDivder);
@@ -112,8 +123,11 @@ const LoadItemFourm = () => {
     inputFive.setAttribute('rows', '4');
     inputFive.setAttribute('cols', '80');
     inputFive.setAttribute('id', 'task-notes');
+    inputFive.setAttribute('required', '');
+    const divderFive = document.createElement('div');
+    divderFive.appendChild(inputFive);
     itemDivFive.appendChild(labelFive);
-    itemDivFive.appendChild(inputFive);
+    itemDivFive.appendChild(divderFive);
 
     const inputButton = document.createElement("button");
     inputButton.setAttribute('type', 'submit');
@@ -121,10 +135,10 @@ const LoadItemFourm = () => {
     inputButton.textContent = 'Submit';
 
     form.appendChild(itemDivOne);
-    form.appendChild(inputTwo);
-    form.appendChild(inputThree);
+    form.appendChild(itemDivTwo);
+    form.appendChild(itemDivThree);
     form.appendChild(field);
-    form.appendChild(inputFive);
+    form.appendChild(itemDivFive);
     form.appendChild(inputButton);
 
     return form
@@ -142,4 +156,46 @@ const LoadItemCreation = (main) => {
     return form.lastChild
 };
 
-export {loadToDo, LoadItemCreation}
+/*Deletion*/
+/*Delete Project */
+const LoadDeleteItemFourm = (projectList) => {
+    const form = document.createElement('form');
+
+    for (let taskNumber in projectList) {
+        const project = document.createElement('div');
+
+        const label = document.createElement('label');
+        label.setAttribute('for', `project-task-dele`);
+        label.textContent = projectList[taskNumber]['title'];
+
+        const input = document.createElement("input");
+        input.setAttribute('type', 'checkbox');
+        input.setAttribute('name', `project-task-dele`);
+        input.setAttribute('id', `project-task-dele`);
+
+        project.appendChild(input);
+        project.appendChild(label);
+        form.appendChild(project);
+    };
+
+    const inputButton = document.createElement("button");
+    inputButton.setAttribute('type', 'submit');
+    inputButton.id = 'submit-button';
+    inputButton.textContent = 'Delete';
+
+    form.appendChild(inputButton);
+
+    return form
+};
+
+const LoadItemDeletion = (main, projectList) => {
+    clearPage(main);
+    const form = LoadDeleteItemFourm(projectList);
+    const header = document.createElement('h2');
+    header.textContent = "Choose Item(s) to Delete";
+    main.appendChild(header);
+    main.appendChild(form);
+    return form.lastChild;
+};
+
+export {loadToDo, LoadItemCreation, LoadItemDeletion}

@@ -90,6 +90,7 @@ const LoadProjectDeletion = (main, todos) => {
     const form = LoadDeleteFourm(todos);
     const header = document.createElement('h2');
     header.textContent = "Choose Project(s) to Delete";
+    main.appendChild(header);
     main.appendChild(form);
     return form.lastChild;
 };

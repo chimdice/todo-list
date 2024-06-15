@@ -31,9 +31,11 @@ section {
     color: black;
 }
 
-.sidebar button {
+.sidebar button,
+.item-button {
     border: none;
     background-color: var(--light-cyan);
+    margin: 10px;
 }
 
 .sidebar div:hover {
@@ -55,6 +57,7 @@ header, footer {
 
 #project-tasks {
     display: flex;
+    gap: 40px;
 }
 
 .item-form {
